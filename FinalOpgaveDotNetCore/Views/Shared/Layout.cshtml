@@ -1,0 +1,37 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Layout";
+}
+
+<!doctype html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>@ViewData["Title"] - FinalOpgave</title>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a asp-controller="Home" asp-action="Index" class="navbar-brand">BikeShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a asp-controller="Products" asp-action="Index" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nr">@ViewData["nr"]</a>
+                    <a asp-controller="Products" asp-action="ShoppingBag" class="nav-link"><img class="banner" width="20" src="~/images/icons/cart.png" alt="Alternate Text"></img></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

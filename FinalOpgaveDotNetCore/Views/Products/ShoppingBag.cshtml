@@ -1,0 +1,49 @@
+﻿@model Model.ShoppingBag;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<section class="text-center">
+    <div class="container">
+        <h1>Shopping Bag</h1>
+    </div>
+</section>
+<div class="container-fluid">
+<div class="row  justify-content-md-center">
+    @foreach (var item in Model.ShoppingItems)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card">
+                <img class="card-img-top" src="@ViewData[(item.ProductId).ToString()]">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Product.Name</h5>
+                    <p class="card-text">€ @item.Product.Price</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <p>Quantity: </p>
+                    <form name="Quantity" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" method="post">
+                        <input type="text" id="quantity" placeholder="@item.Quantity" name="quantity" />
+                    </form>
+
+                    <form asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                        <input class="btn btn-danger" value="Delete" type="submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+</div>
+<p class="text-center">Total = @Model.Total</p>
+
+<script>
+    $('Quantity').keydown(function () {
+        var key = e.which;
+        if (key == 13) {
+            $('Quantity').submit();
+        }
+    });
+</script>
